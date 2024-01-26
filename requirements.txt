@@ -135,3 +135,9 @@ wrapt==1.16.0
 WTForms==3.1.1
 yarl==1.9.3
 zarr==2.14.2
+click==7.1.2
+gunicorn==20.0.4
+itsdangerous==1.1.0
+Jinja2==2.11.3
+MarkupSafe==1.1.1
+Werkzeug==1.0.1

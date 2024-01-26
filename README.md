@@ -1,23 +1,4 @@
----
-title: Flask
-description: A popular minimal server framework for Python
-tags:
-  - python
-  - flask
----
+# uwanja-wa-michezo
+This is the Repo for the Landing page and web-application for Mwanga
 
-# Python Flask Example
-
-This is a [Flask](https://flask.palletsprojects.com/en/1.1.x/) app that serves a simple JSON response.
-
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/zUcpux)
-
-## ✨ Features
-
-- Python
-- Flask
-
-## 💁‍♀️ How to use
-
-- Install Python requirements `pip install -r requirements.txt`
-- Start the server for development `python3 main.py`
+with regards to thuto we can get social media infulcers specificaly students and content creators who can push the product

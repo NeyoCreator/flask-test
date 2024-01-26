@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styling for selected items */
+        #selectedAppliances .badge {
+            padding: 0.375rem 0.75rem; /* Adjusted padding */
+            margin-right: 0.5rem;
+            border: 1px solid #343a40; /* Added stroke */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark navbar-1 bg-dark">
+        <a class="navbar-brand" href="#">Mwanga Energies</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
+            aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent15">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Form Section -->
+    <div class="container mt-3">
+        <h3 class="mb-4">How much power do you generate?</h3>
+
+        <!-- Input Form -->
+         <!-- Input Form -->
+    <form action="{{ url_for('consumption') }}" method="post">
+        <!-- Your form fields go here -->
+        <input type="hidden" id="selectedAppliancesInput" name="selectedAppliances" value="">
+        <input type="hidden" id="totalWattInput" name="totalWatt" value="">
+
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#applianceModal">Add</button>
+
+        <!-- Selected Appliances -->
+        <div id="selectedAppliances" class="mt-2"></div>
+        <!-- Total Watt Display -->
+        <div id="totalWattDisplay" class="mt-2"></div>
+
+        <!-- Next Button -->
+        <button type="submit" class="btn btn-dark mt-2">Next</button>
+    </form>
+
+        <!-- Appliance Modal -->
+        <div class="modal fade" id="applianceModal" tabindex="-1" role="dialog" aria-labelledby="applianceModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applianceModalLabel">Select Appliance</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- List of Appliances -->
+                        <ul class="list-group">
+                            <li class="list-group-item" data-wattage="100">Refrigerator</li>
+                            <li class="list-group-item" data-wattage="1500">Oven</li>
+                            <li class="list-group-item" data-wattage="1000">Microwave</li>
+                            <li class="list-group-item" data-wattage="800">Stove or Cooktop</li>
+                            <li class="list-group-item" data-wattage="1200">Dishwasher</li>
+                            <li class="list-group-item" data-wattage="500">Washing Machine</li>
+                            <li class="list-group-item" data-wattage="800">Dryer</li>
+                            <li class="list-group-item" data-wattage="700">Toaster</li>
+                            <li class="list-group-item" data-wattage="900">Coffee Maker</li>
+                            <li class="list-group-item" data-wattage="400">Blender</li>
+                            <li class="list-group-item" data-wattage="1200">Kettle</li>
+                            <li class="list-group-item" data-wattage="600">Food Processor</li>
+                            <li class="list-group-item" data-wattage="300">Mixer (stand or hand)</li>
+                            <li class="list-group-item" data-wattage="700">Vacuum Cleaner</li>
+                            <li class="list-group-item" data-wattage="1200">Iron</li>
+                            <li class="list-group-item" data-wattage="1500">Hair Dryer</li>
+                            <li class="list-group-item" data-wattage="1500">Air Conditioner</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom Script -->
+    <script>
+        $(document).ready(function () {
+            $(".list-group-item").click(function () {
+                var selectedAppliance = $(this).text();
+                var wattage = parseInt($(this).data("wattage"));
+                $("#selectedAppliances").append('<span class="badge badge-dark mr-2">' + selectedAppliance + '</span>');
+    
+                // Calculate and display total wattage
+                var totalWattage = 0;
+                $("#selectedAppliances .badge").each(function () {
+                    totalWattage += wattage;
+                });
+                $("#totalWattDisplay").text("Total Watt: " + totalWattage + " W");
+    
+                // Update hidden input fields
+                $("#selectedAppliancesInput").val($("#selectedAppliances").text());
+                $("#totalWattInput").val(totalWattage);
+                
+                $("#applianceModal").modal("hide");
+            });
+        });
+    </script>
+
+</body>
+</html>
